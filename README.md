@@ -12,7 +12,7 @@ WritEra is a clean, minimal, and fully responsive blogging web application that 
 
 ## 📸 Screenshots For Desktop
 
-| Home Page | Create Blog | View Blogs | View All Blogs |
+| Home Page | Create Blog | View All Blogs | View Blogs |
 |-----------|-------------|------------|----------------|
 | ![Home](screenshots/home.png) | ![Create](screenshots/create.png) | ![View All](screenshots/viewAll.png) | ![View](screenshots/view.png) |
 
@@ -20,7 +20,7 @@ WritEra is a clean, minimal, and fully responsive blogging web application that 
 
 ## 📸 Screenshots For Mobile
 
-| Home Page | Sidebar | Create Blog | View Blogs | View All Blogs |
+| Home Page | Sidebar | Create Blog | View All Blogs | View Blogs |
 |-----------|---------|-------------|------------|----------------|
 | ![Home](screenshots/mobileHome.png) | ![Sidebar](screenshots/mobileHomeSidebar.png) | ![Create](screenshots/mobileCreate.png) | ![View All](screenshots/mobileViewAll.png) | ![View](screenshots/mobileView.png) |
 

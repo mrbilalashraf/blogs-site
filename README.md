@@ -14,7 +14,7 @@ WritEra is a clean, minimal, and fully responsive blogging web application that 
 
 | Home Page | Create Blog | View Blogs | | View All Blogs |
 |-----------|-------------|------------| |----------------|
-| ![Home](screenshots/home.png) | ![Create](screenshots/create.png) | ![View all](screenshots/viewall.png) | ![View](screenshots/view.png) |
+| ![Home](screenshots/home.png) | ![Create](screenshots/create.png) | ![View all](screenshots/viewAll.png) | ![View](screenshots/view.png) |
 
 ---
 

@@ -102,9 +102,11 @@ blogs-site/
 3. Import your GitHub repository
 4. Configure build settings if needed
 
+```bash
 Framework: React
 Build Command: npm run build
 Output Directory: build
+```
 
 5. Deploy and enjoy your live app!
 

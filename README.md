@@ -10,26 +10,19 @@ WritEra is a clean, minimal, and fully responsive blogging web application that 
 
 ---
 
-## 📸 Screenshots – Desktop View
+## 📸 Screenshots For Desktop
 
-<div align="center">
-  <img src="screenshots/home.png" alt="Home" width="250" style="margin: 0 10px;"/>
-  <img src="screenshots/create.png" alt="Create Blog" width="250" style="margin: 0 10px;"/>
-  <img src="screenshots/viewAll.png" alt="View All Blogs" width="250" style="margin: 0 10px;"/>
-  <img src="screenshots/view.png" alt="View Blog" width="250" style="margin: 0 10px;"/>
-</div>
+| Home Page | Create Blog | View Blogs | View All Blogs |
+|-----------|-------------|------------|----------------|
+| ![Home](screenshots/home.png) | ![Create](screenshots/create.png) | ![View All](screenshots/viewAll.png) | ![View](screenshots/view.png) |
 
 ---
 
-## 📸 Screenshots – Mobile View
+## 📸 Screenshots For Mobile
 
-<div align="center">
-  <img src="screenshots/mobileHome.png" alt="Mobile Home" width="160" style="margin: 0 10px;"/>
-  <img src="screenshots/mobileHomeSidebar.png" alt="Mobile Sidebar" width="160" style="margin: 0 10px;"/>
-  <img src="screenshots/mobileCreate.png" alt="Mobile Create" width="160" style="margin: 0 10px;"/>
-  <img src="screenshots/mobileViewAll.png" alt="Mobile View All" width="160" style="margin: 0 10px;"/>
-  <img src="screenshots/mobileView.png" alt="Mobile View Blog" width="160" style="margin: 0 10px;"/>
-</div>
+| Home Page | Sidebar | Create Blog | View Blogs | View All Blogs |
+|-----------|---------|-------------|------------|----------------|
+| ![Home](screenshots/mobileHome.png) | ![Sidebar](screenshots/mobileHomeSidebar.png) | ![Create](screenshots/mobileCreate.png) | ![View All](screenshots/mobileViewAll.png) | ![View](screenshots/mobileView.png) |
 
 ---
 

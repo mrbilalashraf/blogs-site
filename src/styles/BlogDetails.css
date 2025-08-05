@@ -1,0 +1,151 @@
+/* BlogDetails Page Styles */
+.blog-details-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  width: 100%;
+}
+
+.blog-details-container h1 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  color: #333;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.blog-date {
+  font-size: 0.9rem;
+  color: #888;
+  margin-bottom: 30px;
+  display: block;
+  word-wrap: break-word;
+}
+
+.blog-content {
+  color: #444;
+  line-height: 1.8;
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  width: 100%;
+}
+
+.blog-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto; /* optional: center image with spacing */
+  border-radius: 4px;
+}
+
+.blog-content p {
+  margin-bottom: 20px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.blog-actions {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.back-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #4a90e2;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  word-wrap: break-word;
+}
+
+.back-link:hover {
+  background-color: #357abD;
+}
+
+.placeholder-note {
+  margin-top: 30px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-left: 4px solid #4a90e2;
+  color: #666;
+  font-style: italic;
+  word-wrap: break-word;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .blog-details-container {
+    padding: 15px;
+  }
+  
+  .blog-details-container h1 {
+    font-size: 1.8rem;
+  }
+  
+  .blog-content {
+    font-size: 1rem;
+  }
+  
+  .blog-date {
+    font-size: 0.85rem;
+    margin-bottom: 15px;
+  }
+  
+  .blog-actions {
+    margin-top: 25px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .blog-details-container {
+    padding: 20px 10px;
+  }
+
+  .blog-details-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+  
+  .blog-date {
+    font-size: 0.8rem;
+    margin-bottom: 12px;
+  }
+
+  .blog-content {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  
+  .blog-content p {
+    margin-bottom: 15px;
+  }
+  
+  .blog-content img {
+    margin: 15px 0;
+  }
+  
+  .blog-actions {
+    margin-top: 20px;
+    justify-content: center;
+  }
+  
+  .back-link {
+    font-size: 0.9rem;
+  }
+  
+  .placeholder-note {
+    font-size: 1rem;
+    margin: 30px 0;
+  }
+}

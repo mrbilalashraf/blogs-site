@@ -1,0 +1,151 @@
+/* ViewBlogs Page Styles */
+.view-blogs-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  width: 100%;
+}
+
+.view-blogs-container h1 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #333;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.blogs-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+.blog-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.5rem;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  overflow: hidden;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.blog-card h2 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.blog-date {
+  color: #888;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+}
+
+.blog-excerpt {
+  color: #555;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.read-more-link {
+  display: inline-block;
+  color: #4a90e2;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 10px;
+  word-wrap: break-word;
+}
+
+.read-more-link:hover {
+  text-decoration: underline;
+}
+
+.placeholder-note {
+  text-align: center;
+  color: #666;
+  margin: 40px 0;
+  font-size: 1.1rem;
+  word-wrap: break-word;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+  .view-blogs-container {
+    padding: 30px 15px;
+  }
+
+  .blog-card {
+    padding: 15px;
+  }
+
+  .view-blogs-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .blog-card h2 {
+    font-size: 1.3rem;
+  }
+  
+  .blog-card p {
+    font-size: 0.95rem;
+  }
+  
+  .blog-date {
+    font-size: 0.85rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .view-blogs-container {
+    padding: 20px 10px;
+  }
+  
+  .view-blogs-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .blogs-list {
+    gap: 15px;
+  }
+  
+  .blog-card {
+    padding: 12px;
+  }
+  
+  .blog-card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+  
+  .blog-excerpt {
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .blog-date {
+    font-size: 0.8rem;
+  }
+  
+  .read-more-link {
+    font-size: 0.9rem;
+  }
+  
+  .placeholder-note {
+    font-size: 1rem;
+    margin: 30px 0;
+  }
+}

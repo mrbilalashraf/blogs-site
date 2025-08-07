@@ -9,8 +9,10 @@ const CreateBlog = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [coverImage, setCoverImage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
   const history = useHistory();
-  const quillRef = useRef(); // Ref for accessing Quill instance
+  const quillRef = useRef();
 
   const API_URL = process.env.REACT_APP_API_URL;
   const MAX_IMAGE_SIZE = 1 * 1024 * 1024; // 1MB
@@ -107,6 +109,8 @@ const CreateBlog = () => {
       return;
     }
     
+    setIsLoading(true);
+    
     try {
       const formData = new FormData();
     formData.append('title', title);
@@ -139,10 +143,18 @@ const CreateBlog = () => {
       
     } catch (error) {
       console.error('Error creating blog:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
+    isLoading ? (
+      <div className="loader-overlay">
+        <div className="loader">Creating blog...</div>
+      </div>
+    ) : (
+
     <div className="create-blog-container">
       <h1 className="create-blog-title">Create a New Blog</h1>
       <form onSubmit={handleSubmit} className="create-blog-form">
@@ -181,11 +193,12 @@ const CreateBlog = () => {
             className="react-quill"
           />
         </div>
-        <button type="submit" className="submit-btn btn">
+        <button type="submit" className="submit-btn btn" disabled={isLoading}>
           Create Blog
         </button>
       </form>
     </div>
+    )
   );
 };
 

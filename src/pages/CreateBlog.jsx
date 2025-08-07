@@ -8,18 +8,32 @@ import LZString from 'lz-string';
 const CreateBlog = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [coverImage, setCoverImage] = useState('');
   const history = useHistory();
   const quillRef = useRef(); // Ref for accessing Quill instance
 
+  const API_URL = process.env.REACT_APP_API_URL;
   const MAX_IMAGE_SIZE = 1 * 1024 * 1024; // 1MB
 
-  const imageHandler = () => {
+  const handleCoverImageChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+  
+    if (file.size > MAX_IMAGE_SIZE) {
+      alert('Cover image must be less than 1MB');
+      e.target.value = '';
+      setCoverImage('');
+      return;
+    }
+  };
+  
+  const imageHandler = async () => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
     input.setAttribute('accept', 'image/*');
     input.click();
 
-    input.onchange = () => {
+    input.onchange = async () => {
       const file = input.files?.[0];
       if (!file) return;
 
@@ -28,13 +42,24 @@ const CreateBlog = () => {
         return;
       }
 
-      const reader = new FileReader();
-      reader.onload = () => {
-        const quill = quillRef.current?.getEditor();
-        const range = quill?.getSelection(true);
-        quill?.insertEmbed(range?.index || 0, 'image', reader.result);
-      };
-      reader.readAsDataURL(file);
+      if (file) {
+        const formData = new FormData();
+        formData.append('contentImage', file);
+  
+        try {
+          const res = await fetch(`${API_URL}/uploadContentImage`, {
+            method: 'POST',
+            body: formData
+          });
+  
+          const data = await res.json();
+          const quill = quillRef.current.getEditor();
+          const range = quill.getSelection();
+          quill.insertEmbed(range.index, 'image', data.url);
+        } catch (err) {
+          console.error('Image upload failed', err);
+        }
+      }
     };
   };
 
@@ -74,27 +99,47 @@ const CreateBlog = () => {
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleContentChange = (value) => setContent(value);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!title.trim() || !content.trim()) {
       alert('Please provide both title and content for your blog');
       return;
     }
+    
+    try {
+      const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', LZString.compressToBase64(content));
+    if (formData.get('content').length > 1000000) { // ~1MB base64 compressed
+      alert('Your blog is too large. Please reduce content or image count.');
+      return;
+    }
+    formData.append('createdAt', new Date().toISOString());
 
-    const newBlog = {
-      id: Date.now().toString(),
-      title: title,
-      content: LZString.compress(content),
-      createdAt: new Date().toISOString()
-    };
+    const imageInput = document.getElementById('coverImage');
+    const file = imageInput.files[0];
+    if (file) {
+      formData.append('coverImage', file);
+    }
 
-    const existingBlogs = JSON.parse(localStorage.getItem('blogs') || '[]');
-    existingBlogs.push(newBlog);
-    localStorage.setItem('blogs', JSON.stringify(existingBlogs));
+      const response = await fetch(`${API_URL}/create`, {
+        method: 'POST',
+        body: formData
+      });
 
-    alert('Blog created successfully!');
-    history.push('/blogs');
+      if (!response.ok) {
+        throw new Error('Failed to create blog');
+      }
+
+      const data = await response.json();
+      console.log(data);
+      alert('Blog created successfully!');
+      history.push('/blogs');
+      
+    } catch (error) {
+      console.error('Error creating blog:', error);
+    }
   };
 
   return (
@@ -112,6 +157,17 @@ const CreateBlog = () => {
             required
           />
         </div>
+
+        <div className="form-group">
+          <label htmlFor="coverImage">Cover Image</label>
+          <input
+            type="file"
+            id="coverImage"
+            accept="image/*"
+            onChange={(e) => handleCoverImageChange(e)}
+          />
+        </div>
+
         <div className="form-group quill-container">
           <label htmlFor="content">Content</label>
           <ReactQuill

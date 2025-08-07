@@ -7,12 +7,21 @@ const ViewBlogs = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Load blogs from localStorage
-    const storedBlogs = JSON.parse(localStorage.getItem('blogs') || '[]');
-    setBlogs(storedBlogs);
+  const API_URL = process.env.REACT_APP_API_URL;
 
-    setLoading(false);
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await fetch(`${API_URL}/getBlogs`);
+        const data = await response.json();
+        setBlogs(data.reverse());
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+        setLoading(false);
+      }
+    };
+    fetchBlogs();
   }, []);
 
   // Function to create excerpt from HTML content
@@ -46,10 +55,15 @@ const ViewBlogs = () => {
             {blogs.length > 0 ? (
               blogs.map(blog => (
                 <div key={blog.id} className="blog-card">
+                  {blog.cover_image && (
+                    <div className="blog-cover-wrapper">
+                      <img src={`${API_URL}/images/${blog.cover_image}`} alt="Cover" className="blog-cover-image" />
+                    </div>
+                  )}
                   <h2>{blog.title}</h2>
-                  <p className="blog-date">Posted on: {formatDate(blog.createdAt)}</p>
-                  <p className="blog-excerpt">{createExcerpt(LZString.decompress(blog.content))}</p>
-                  <Link to={`/blog/${blog.id}`} className="read-more-link">
+                  <p className="blog-date">Posted on: {formatDate(blog.created_at)}</p>
+                  <p className="blog-excerpt">{createExcerpt(LZString.decompressFromBase64(blog.content))}</p>
+                  <Link to={`/blog/${blog.id}`} state={{ blog }} className="read-more-link">
                     Read More
                   </Link>
                 </div>

@@ -1,28 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useLocation, useParams, Link } from 'react-router-dom';
 import '../styles/BlogDetails.css';
 import LZString from 'lz-string';
 
 const BlogDetails = () => {
   const { id } = useParams();
-  const [blog, setBlog] = useState(null);
+  const location = useLocation();
+  const [blog, setBlog] = useState(location.state?.blog || null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
-    // Load blogs from localStorage
-    const storedBlogs = JSON.parse(localStorage.getItem('blogs') || '[]');
-    
-    // Find the specific blog by id
-    const foundBlog = storedBlogs.find(blog => blog.id === id);
-    
-    if (foundBlog) {
-      setBlog(foundBlog);
-    } else {
-      setNotFound(true);
+    if (blog && blog.id?.toString() === id) {
+      setLoading(false); // Already have the correct blog from props
+      return;
     }
-    
-    setLoading(false);
+
+    // Fallback to fetch blog from DB
+    const fetchBlog = async () => {
+      try {
+        const res = await fetch(`${API_URL}/getBlogs/${id}`);
+        if (!res.ok) throw new Error('Blog not found');
+
+        const data = await res.json();
+        setBlog(data[0]);
+      } catch (error) {
+        console.error('Fetch error:', error);
+        setNotFound(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlog();
   }, [id]);
 
   // Format date for display
@@ -50,11 +62,16 @@ const BlogDetails = () => {
       ) : (
         <>
           <h1>{blog.title}</h1>
-          <p className="blog-date">Posted on: {formatDate(blog.createdAt)}</p>
-          
+          <p className="blog-date">Posted on: {formatDate(blog.created_at)}</p>
+          {blog.cover_image && (
+            <div className="blog-cover-image">
+              <img src={`${API_URL}/images/${blog.cover_image}`} alt="Cover" />
+            </div>
+          )}
+
           <div 
             className="blog-content"
-            dangerouslySetInnerHTML={{ __html: LZString.decompress(blog.content) }}
+            dangerouslySetInnerHTML={{ __html: LZString.decompressFromBase64(blog.content) }}
           />
           
           <div className="blog-actions">

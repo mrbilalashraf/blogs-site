@@ -47,6 +47,8 @@ WritEra is a clean, minimal, and fully responsive blogging web application that 
 
 ## 📂 Folder Structure
 
+```bash
+
 blogs-site/
 ├── public/
 │ └── index.html
@@ -71,7 +73,7 @@ blogs-site/
 ├── README.md
 └── package.json
 
----
+```
 
 ## 🛠️ Installation & Setup
 
